@@ -22,6 +22,7 @@ public class GreetingQuery implements GraphQLQueryResolver {
   @SuppressWarnings("unused")
   public Greeting getGreeting(String id) {
 //    return greetingRepository.find(id);
+    System.out.print("id:"+id);
     return new Greeting("hi", "wei");
   }
 }
