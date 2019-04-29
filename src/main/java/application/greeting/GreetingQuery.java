@@ -1,5 +1,7 @@
-package application;
+package application.greeting;
 
+import application.repository.GreetingDaoRepository;
+import application.repository.GreetingRepository;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

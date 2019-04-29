@@ -1,8 +1,9 @@
-package application;
+package application.repository;
+
+import application.greeting.Greeting;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-
-import org.springframework.stereotype.Component;
 
 @Component
 public class GreetingRepository {

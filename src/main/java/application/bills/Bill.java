@@ -1,11 +1,18 @@
 package application.bills;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
+@Entity
 public class Bill {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
 
     private double amount;
 
@@ -17,8 +24,9 @@ public class Bill {
 
     private String provider;
 
-    public Bill(int id, double amount, String type, Date dueDate, String status, String provider) {
-        this.id = id;
+    public Bill(){}
+
+    public Bill(double amount, String type, Date dueDate, String status, String provider) {
         this.amount = amount;
         this.type = type;
         this.dueDate = dueDate;
@@ -26,13 +34,13 @@ public class Bill {
         this.provider = provider;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public double getAmount() {
         return amount;
@@ -72,5 +80,10 @@ public class Bill {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    @Override
+    public String toString() {
+        return "id:" + " type:"+getType() + " amount :" + getAmount();
     }
 }

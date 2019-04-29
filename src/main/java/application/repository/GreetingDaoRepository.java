@@ -5,8 +5,9 @@
  * Date: 24/08/18
  * Time: 4:15 PM
  */
-package application;
+package application.repository;
 
+import application.greeting.Greeting;
 import org.springframework.data.repository.CrudRepository;
 
 /**

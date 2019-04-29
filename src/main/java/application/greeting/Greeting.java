@@ -1,4 +1,4 @@
-package application;
+package application.greeting;
 
 import javax.persistence.*;
 

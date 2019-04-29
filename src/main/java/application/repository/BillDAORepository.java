@@ -1,4 +1,9 @@
 package application.repository;
 
-public class BillDAORepository {
+import application.bills.Bill;
+import org.springframework.data.repository.CrudRepository;
+
+// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
+// CRUD refers Create, Read, Update, Delete
+public interface BillDAORepository extends CrudRepository<Bill, Integer> {
 }
