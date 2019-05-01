@@ -1,8 +1,6 @@
-package application.controller;
+package application;
 
 import application.bills.Bill;
-import application.repository.BillDAORepository;
-import application.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

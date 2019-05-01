@@ -1,4 +1,4 @@
-package application.controller;
+package application;
 
 import application.greeting.Greeting;
 import org.springframework.web.bind.annotation.CrossOrigin;

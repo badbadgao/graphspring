@@ -1,4 +1,4 @@
-package application.repository;
+package application;
 
 import application.greeting.Greeting;
 import org.springframework.stereotype.Component;

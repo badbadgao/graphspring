@@ -1,4 +1,4 @@
-package application.repository;
+package application;
 
 import application.bills.Bill;
 import org.springframework.data.repository.CrudRepository;
