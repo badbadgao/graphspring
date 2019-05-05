@@ -1,10 +1,7 @@
 package application.bills;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -16,12 +13,15 @@ public class Bill {
 
     private double amount;
 
+    @Column(nullable = false, length = 32)
     private String type;
 
     private Date dueDate;
 
+    @Column(nullable = false, length = 32)
     private String status;
 
+    @Column(nullable = false, length = 32)
     private String provider;
 
     public Bill(){}
@@ -33,14 +33,6 @@ public class Bill {
         this.status = status;
         this.provider = provider;
     }
-
-//    public int getId() {
-//        return id;
-//    }
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public double getAmount() {
         return amount;
