@@ -3,13 +3,17 @@ package application;
 import application.bills.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
+@SuppressWarnings("unused")
 public class BillController {
 
+    @SuppressWarnings("unused")
     @Autowired
     private BillRepository billRepository;
 
@@ -20,7 +24,6 @@ public class BillController {
     @RequestMapping("/bills")
     public List<Bill> getBills() {
         return (List<Bill>) billDAORepository.findAll();
-//        return billRepository.getBills();
     }
 
     @PostMapping("/bill")
@@ -28,6 +31,14 @@ public class BillController {
         newBill.setStatus("Unpaid");
         billDAORepository.save(newBill);
         return (List<Bill>) billDAORepository.findAll();
+    }
+
+    @PutMapping("/bill/{id}")
+    public Bill payBill(@PathVariable(value="id") Integer billId) {
+        Bill bill = billDAORepository.findById(billId)
+                .orElseThrow(() -> new ResourceAccessException("Bill not found"));
+        bill.setStatus("Paid");
+        return billDAORepository.save(bill);
     }
 
     @DeleteMapping("/bill")
