@@ -34,11 +34,12 @@ public class BillController {
     }
 
     @PutMapping("/bill/{id}")
-    public Bill payBill(@PathVariable(value="id") Integer billId) {
+    public @ResponseBody List<Bill> payBill(@PathVariable(value="id") Integer billId) {
         Bill bill = billDAORepository.findById(billId)
                 .orElseThrow(() -> new ResourceAccessException("Bill not found"));
         bill.setStatus("Paid");
-        return billDAORepository.save(bill);
+        billDAORepository.save(bill);
+        return (List<Bill>) billDAORepository.findAll();
     }
 
     @DeleteMapping("/bill")
