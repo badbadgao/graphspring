@@ -2,6 +2,7 @@ package application;
 
 import application.bills.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -23,7 +24,7 @@ public class BillController {
 
     @RequestMapping("/bills")
     public List<Bill> getBills() {
-        return (List<Bill>) billDAORepository.findAll();
+        return billDAORepository.findAll(new Sort(Sort.Direction.ASC, "dueDate"));
     }
 
     @PostMapping("/bill")
