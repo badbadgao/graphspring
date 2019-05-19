@@ -18,15 +18,16 @@ public class Bill {
 
     private Date dueDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 32)
-    private String status;
+    private BillStatus status;
 
     @Column(nullable = false, length = 32)
     private String provider;
 
     public Bill(){}
 
-    public Bill(double amount, String type, Date dueDate, String status, String provider) {
+    public Bill(double amount, String type, Date dueDate, BillStatus status, String provider) {
         this.amount = amount;
         this.type = type;
         this.dueDate = dueDate;
@@ -66,11 +67,11 @@ public class Bill {
         this.dueDate = dueDate;
     }
 
-    public String getStatus() {
+    public BillStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BillStatus status) {
         this.status = status;
     }
 
