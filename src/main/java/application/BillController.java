@@ -6,6 +6,7 @@ import application.constant.ResultCode;
 import ch.qos.logback.core.encoder.EchoEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -19,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @CrossOrigin
 @RestController
 @SuppressWarnings("unused")
@@ -32,7 +34,9 @@ public class BillController {
 
     @RequestMapping("/bills")
     public List<Bill> getBills() {
-        return billDAORepository.findAll(new Sort(Sort.Direction.ASC, "dueDate"));
+        String querySql = "SELECT b FROM Bill b where b.retired = false";
+        Query query = manager.createQuery(querySql);
+        return query.getResultList();
     }
 
     @PostMapping("/bill")
@@ -41,7 +45,7 @@ public class BillController {
         Date now = new Date((currentTime.getTime()).getTime());
         newBill.setStatus(BillStatus.UNPAID);
         billDAORepository.save(newBill);
-        return billDAORepository.findAll();
+        return getBills();
     }
 
     @PutMapping("/bill/{id}")
@@ -49,14 +53,16 @@ public class BillController {
         Bill bill = billDAORepository.findById(billId)
                 .orElseThrow(() -> new ResourceAccessException("Bill not found"));
         bill.setStatus(BillStatus.PAID);
+        Calendar currentTime = Calendar.getInstance();
+        Date now = new Date((currentTime.getTime()).getTime());
+        bill.setPaidDate(now);
         billDAORepository.save(bill);
         return billDAORepository.findAll();
     }
 
-    @Transactional
     @DeleteMapping("/bill")
     public List<Bill> deleteBill(@RequestParam("ids") String ids) throws Exception {
-        String querySql = "DELETE FROM Bill b where b.id IN :ids";
+        String querySql = "UPDATE Bill b SET b.retired = true where b.id IN :ids";
         Query query = manager.createNativeQuery(querySql);
         query.setParameter("ids", Arrays.asList(ids.split(",")));
         int resultCode = query.executeUpdate();

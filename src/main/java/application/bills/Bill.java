@@ -18,6 +18,8 @@ public class Bill {
 
     private Date dueDate;
 
+    private Date paidDate;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 32)
     private BillStatus status;
@@ -25,15 +27,10 @@ public class Bill {
     @Column(nullable = false, length = 32)
     private String provider;
 
-    public Bill(){}
+    @Column(columnDefinition = "TINYINT(1) default 0")
+    private boolean retired;
 
-    public Bill(double amount, String type, Date dueDate, BillStatus status, String provider) {
-        this.amount = amount;
-        this.type = type;
-        this.dueDate = dueDate;
-        this.status = status;
-        this.provider = provider;
-    }
+    public Bill(){}
 
     public Integer getId() {
         return id;
@@ -81,6 +78,22 @@ public class Bill {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    public Date getPaidDate() {
+        return paidDate;
+    }
+
+    public void setPaidDate(Date paidDate) {
+        this.paidDate = paidDate;
+    }
+
+    public boolean isRetired() {
+        return retired;
+    }
+
+    public void setRetired(boolean retired) {
+        this.retired = retired;
     }
 
     @Override
