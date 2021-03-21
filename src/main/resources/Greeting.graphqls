@@ -1,10 +1,10 @@
 type Greeting {
-  id: ID!
+  id: String!
   message: String!
 }
 
 type Query {
-  Greeting(id: ID!): Greeting!
+  Greeting(id: String!): Greeting!
   Greetings: [Greeting]!
 }
 

@@ -57,7 +57,7 @@ public class BillController {
         Date now = new Date((currentTime.getTime()).getTime());
         bill.setPaidDate(now);
         billDAORepository.save(bill);
-        return billDAORepository.findAll();
+        return getBills();
     }
 
     @DeleteMapping("/bill")
